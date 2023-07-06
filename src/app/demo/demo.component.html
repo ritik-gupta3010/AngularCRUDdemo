@@ -1,0 +1,63 @@
+<p>demo works!</p>
+<div class="h-100 d-flex align-items-center justify-content-center mt-5">
+    <div class="border border-danger rounded bg-info" style="width: 50%">
+        <form class="row g-3 d-flex p-3" [formGroup]="demoForm">
+            <h1 class="text-center">Personal Details(CRUd Operation)</h1>
+            <div class="col-md-6">
+                <label for="" class="form-label">First Name</label>
+                <input type="text" placeholder="Enter your first name" class="form-control" formControlName="fName" />
+            </div>
+            <div class="col-md-6">
+                <label for="" class="form-label">Last Name</label>
+                <input type="text" placeholder="Enter your lasst name" class="form-control" formControlName="lName" />
+            </div>
+            <div class="col-12 d-flex justify-content-between">
+                <button type="submit" class="btn btn-danger" *ngIf="!editForm"
+                    (click)="registerUser()" >
+                    submit
+                </button>
+                <button type="submit" class="btn btn-danger" *ngIf="editForm"
+                    (click)="updateUser()">
+                    update
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <table class="mt-5 w-100">
+        <tr>
+            <th>serial</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let user of details; index as i">
+            <td>{{i+1}}</td>
+            <td>{{user.fName}}</td>
+            <td>{{user.lName}}</td>
+            <td>
+                <div class=" d-flex justify-content-around">
+                    <button type="button" class="btn btn-success" (click)="editUser(i,user)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pen" viewBox="0 0 16 16">
+                            <path
+                                d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="deleteUser(i,user)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                            <path
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                        </svg>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <h1 *ngIf="details.length==0" class="text-danger text-center">No Data found</h1>
+</div>
